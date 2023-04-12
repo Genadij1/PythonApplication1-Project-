@@ -1,59 +1,77 @@
 import random
 import string
+
+numbers = string.digits
+uppercase_letters = string.ascii_uppercase
+lowercase_letters = string.ascii_lowercase
+special_chars = string.punctuation
+
+char_pool = ''
+
 while True:
-    password_lengs = int(input("Enter the password length: ")) 
-    if password_lengs <= 0:
-       print("Password length must be greater than 0")
-       continue
-    elif password_lengs > 100:
-       print("Password length must be less than 100")
-       continue
-    elif password_lengs > 0 and password_lengs <= 100:
-       break
+    try:
+        password_length = int(input("Enter the length of password: "))
+        if password_length < 1:
+            print("Password length must be greater than 1")
+            continue
+        elif password_length > 20:
+            print("Password length must be less than 20")
+            continue
+        else:
+            break
+    except ValueError:
+        print("Password length must be an integer")
+        continue
+
 while True:
-    Use_special_chars = input("Do you want to use special characters? (y/n): ")
-    if Use_special_chars == "y":
-       Use_special_chars = True
-       break
-    elif Use_special_chars == "n":
-       Use_special_chars = False
-       break
+    number = input("Use numbers in password? (y/n)" )
+    if number.lower() == "y":
+        char_pool += numbers
+        break
+    elif number.lower() == "n":
+        break
     else:
-       print("Please enter y or n")
-       continue
+        print("Please enter y or n")
+        continue
+
 while True:
-    Use_numbers = input("Do you want to use numbers? (y/n): ")
-    if Use_numbers == "y":
-       Use_numbers = True
-       break
-    elif Use_numbers == "n":
-       Use_numbers = False
-       break
+    symbol = input("Use symbols in password? (y/n)" )
+    if symbol.lower() == "y":
+        char_pool += special_chars
+        break
+    elif symbol.lower() == "n":
+        break
     else:
-       print("Please enter y or n")
-       continue
+        print("Please enter y or n")
+        continue
+
 while True:
-    Use_uppercase = input("Do you want to use uppercase letters? (y/n): ")
-    if Use_uppercase == "y":
-       Use_uppercase = True
-       break
-    elif Use_uppercase == "n":
-       Use_uppercase = False
-       break
+    upper = input("Use uppercase letters in password? (y/n)" )
+    if upper.lower() == "y":
+        char_pool += uppercase_letters
+        break
+    elif upper.lower() == "n":
+        break
     else:
-       print("Please enter y or n")
-       continue
+        print("Please enter y or n")
+        continue
+
 while True:
-    Use_lowercase = input("Do you want to use lowercase letters? (y/n): ")
-    if Use_lowercase == "y":
-       Use_lowercase = True
-       break
-    elif Use_lowercase == "n":
-       Use_lowercase = False
-       break
+    lower = input("Use lowercase letters in password? (y/n)" )
+    if lower.lower() == "y":
+        char_pool += lowercase_letters
+        break
+    elif lower.lower() == "n":
+        break
     else:
-       print("Please enter y or n")
-       continue
+        print("Please enter y or n")
+        continue
+
+if not char_pool:
+    print("Error: No character sets selected")
+else:
+    password = ''.join(random.choice(char_pool) for i in range(password_length))
+    print("Your generated password is:", password)
 
 
 
